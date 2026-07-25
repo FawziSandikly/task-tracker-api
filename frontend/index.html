@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Tracker</h1>
+            <p id="api-status" class="status-badge">Connecting...</p>
+        </header>
+
+        <main>
+            <!-- Task creation form -->
+            <section class="create-section">
+                <h2>Create New Task</h2>
+                <form id="create-form">
+                    <input 
+                        type="text" 
+                        id="title-input" 
+                        placeholder="Task title (required)" 
+                        required
+                    >
+                    <textarea 
+                        id="description-input" 
+                        placeholder="Task description (optional)"
+                    ></textarea>
+                    <button type="submit">Create Task</button>
+                </form>
+                <div id="create-message"></div>
+            </section>
+
+            <!-- Tasks list -->
+            <section class="tasks-section">
+                <h2>Tasks</h2>
+                <div id="tasks-container" class="tasks-list">
+                    <p class="loading">Loading tasks...</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Backend: <code>http://localhost:8000/api/v1</code></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
