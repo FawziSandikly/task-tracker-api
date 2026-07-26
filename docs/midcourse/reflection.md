@@ -1,48 +1,88 @@
-# Midcourse Reflection
+# Mid-Course Reflection
 
-## Project Overview
+## Overview
 
-The project is a RESTful Task Tracker API that allows users to create, read, update, and delete tasks. Each task includes a title, description, status, priority, and due date.
+The Task Tracker REST API was developed using FastAPI, SQLModel, SQLite, and Pydantic. During the mid-course milestone, the application was expanded with additional functionality including Due Dates and Tags to improve task organization.
+
+---
 
 ## What I Learned
 
-During this project I learned how to:
-- Design RESTful API endpoints.
-- Implement CRUD operations.
-- Connect an API to a database.
-- Validate user input.
-- Handle errors using appropriate HTTP status codes.
-- Test API endpoints using Postman.
+This project strengthened my understanding of REST API development and backend architecture.
+
+I learned how to:
+
+- Design RESTful endpoints using FastAPI.
+- Separate business logic from API endpoints.
+- Use SQLModel for database operations.
+- Validate requests using Pydantic.
+- Write automated tests using pytest.
+- Debug API validation errors.
+- Improve project documentation.
+
+---
 
 ## Challenges
 
-The biggest challenges were:
-- Designing a clean API structure.
-- Handling validation and error responses.
-- Debugging database queries and routing issues.
+The biggest challenge was designing new features while maintaining the existing project architecture.
 
-I overcame these by reading documentation, testing endpoints one at a time, and using AI to understand errors and explore different solutions.
+Adding new fields required changes across several parts of the application, including:
+
+- SQLModel models
+- Pydantic schemas
+- Service layer
+- API endpoints
+- Unit tests
+- Documentation
+
+Testing also required additional effort because every new feature introduced new edge cases that had to be validated.
+
+---
 
 ## How AI Helped
 
-AI helped me:
-- Design API endpoints.
-- Generate example database schemas.
-- Explain Express.js concepts.
-- Debug errors.
-- Improve documentation.
+AI was used throughout the project as a learning assistant rather than simply copying code.
 
-I verified and modified the generated code before using it.
+It helped by:
 
-## Next Steps
+- Explaining FastAPI concepts.
+- Suggesting API designs.
+- Generating example implementations.
+- Debugging validation errors.
+- Writing example unit tests.
+- Improving documentation.
 
-Before completing the project, I plan to:
-- Add authentication.
-- Improve validation.
-- Write more automated tests.
-- Enhance the API documentation.
-- Deploy the API online.
+Every generated response was reviewed, tested, and modified before being used.
 
-## Overall Reflection
+---
 
-This project improved my understanding of backend development and REST APIs. I became more confident working with Express, databases, and API testing. I also learned that AI is most useful when used as a learning and debugging assistant rather than simply copying generated code.
+## Skills Developed
+
+This project improved my understanding of:
+
+- FastAPI
+- SQLModel
+- REST API design
+- SQLite
+- Automated testing
+- Software documentation
+- Debugging backend applications
+
+---
+
+## Future Improvements
+
+Future improvements include:
+
+- User authentication
+- Pagination
+- Search functionality
+- Task priorities
+- Notifications
+- Deployment to a cloud service
+
+---
+
+## Conclusion
+
+The project provided valuable experience in backend development and reinforced the importance of clean architecture, testing, and documentation. It also demonstrated how AI can improve productivity while still requiring careful verification and critical thinking.
