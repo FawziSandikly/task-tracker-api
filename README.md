@@ -11,15 +11,16 @@ This project implements the decisions from ADR-0001:
 - **Testing**: pytest with isolated SQLite databases
 
 ## Features
-
 - ✅ CRUD operations for tasks
 - ✅ Status workflow: `todo` → `in_progress` → `done`
 - ✅ Status transition validation (backward transitions rejected)
+- ✅ Due Dates support
+- ✅ Overdue task filtering
+- ✅ Task Tags for organization
 - ✅ Partial updates preserve omitted fields
 - ✅ Health check endpoint
 - ✅ Comprehensive test coverage
 - ✅ CORS enabled for local frontend integration
-
 ## Quick Start
 
 ### Prerequisites
@@ -78,12 +79,14 @@ pytest tests/test_health.py
 - **GET** `/api/v1/health` - Check API status
 
 ### Tasks
+
 - **POST** `/api/v1/tasks/` - Create a new task
 - **GET** `/api/v1/tasks/` - List all tasks
+- **GET** `/api/v1/tasks/?filter=overdue` - List overdue tasks
+- **GET** `/api/v1/tasks/?tag=work` - Filter tasks by tag
 - **GET** `/api/v1/tasks/{id}` - Get task by ID
 - **PATCH** `/api/v1/tasks/{id}` - Update task
 - **DELETE** `/api/v1/tasks/{id}` - Delete task
-
 ## Status Transitions
 
 Valid transitions per ADR-0001:
@@ -101,11 +104,10 @@ Invalid transitions return HTTP 422:
 ## Example Usage
 
 ### Create a task
-```bash
+bash
 curl -X POST http://localhost:8000/api/v1/tasks/ \
   -H "Content-Type: application/json" \
   -d '{"title": "Buy groceries", "description": "Milk and eggs"}'
-```
 
 ### List all tasks
 ```bash
@@ -113,11 +115,12 @@ curl http://localhost:8000/api/v1/tasks/
 ```
 
 ### Update task status
-```bash
-curl -X PATCH http://localhost:8000/api/v1/tasks/1 \
+curl -X POST http://localhost:8000/api/v1/tasks/ \
   -H "Content-Type: application/json" \
-  -d '{"status": "in_progress"}'
-```
+  -d '{
+    "title":"Buy groceries",
+    "tags":["shopping","personal"]
+  }'
 
 ### Invalid status transition
 ```bash
@@ -163,16 +166,20 @@ task-tracker-api/
 Tasks are stored in SQLite at `./task_tracker.db`. The database is created automatically on first run.
 
 ### Schema
-```sql
 CREATE TABLE tasks (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title VARCHAR NOT NULL,
   description VARCHAR DEFAULT '',
   status VARCHAR DEFAULT 'todo',
+  due_date DATETIME NULL,
+  tags TEXT,
   created_at DATETIME DEFAULT NOW(),
   updated_at DATETIME DEFAULT NOW()
 );
-```
+- Adding task categories/projects
+- Adding due dates
+
+  
 
 ## Testing Strategy
 
@@ -182,14 +189,15 @@ Each test:
 3. Is fully independent from other tests
 4. Tests both valid operations and error cases
 
-### Test Coverage
+#### Test Coverage
+
 - ✅ Health check endpoint
-- ✅ Task creation with default status
-- ✅ Task listing (empty and with data)
-- ✅ Task retrieval by ID (found and 404 cases)
-- ✅ Valid status transitions
-- ✅ Invalid status transitions (422 responses)
-- ✅ Partial updates (omitted fields preserved)
+- ✅ CRUD operations
+- ✅ Status transition validation
+- ✅ Due date validation
+- ✅ Overdue task filtering
+- ✅ Tag creation and updates
+- ✅ Invalid requests and edge cases
 - ✅ Task deletion
 
 ## Development
@@ -201,6 +209,18 @@ Each test:
 4. Add endpoint to `app/api/v1/endpoints/`
 5. Add tests to `tests/`
 
+## Next Steps
+
+Future improvements include:
+
+- User authentication
+- Pagination
+- Search functionality
+- Task priorities
+- Task comments
+- Notifications
+- Alembic database migrations
+- Deployment using PostgreSQL and Docker
 ### Local frontend integration
 Run the frontend on a different port:
 ```bash
