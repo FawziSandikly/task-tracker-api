@@ -1,67 +1,94 @@
 # Prompt Log
 
-## Prompt 1 – Designing the API
-**Goal:** Plan the REST API endpoints for a task tracker.
+## Project
 
-**Prompt:**
-> Design a RESTful Task Tracker API with CRUD operations for tasks. Include endpoints, request bodies, and response examples.
-
-**Outcome:**
-Created the API structure with endpoints:
-- GET /tasks
-- GET /tasks/:id
-- POST /tasks
-- PUT /tasks/:id
-- DELETE /tasks/:id
+Task Tracker REST API
 
 ---
 
-## Prompt 2 – Database Schema
-**Goal:** Create a database model.
+## Prompt 1 – Design Due Date Feature
 
-**Prompt:**
-> Generate a SQL schema for a task tracker application with task title, description, status, priority, and due date.
+**Goal**
 
-**Outcome:**
-Generated a `tasks` table with appropriate columns and constraints.
+Design a feature that allows tasks to have optional due dates and support overdue task filtering.
 
----
+**Prompt**
 
-## Prompt 3 – Error Handling
-**Goal:** Improve API reliability.
+> Design a FastAPI implementation for adding optional due dates to a Task Tracker API using SQLModel. Include validation and an overdue filter.
 
-**Prompt:**
-> Show best practices for handling errors in a Node.js Express REST API.
+**Outcome**
 
-**Outcome:**
-Added consistent HTTP status codes, validation, and error messages.
+The response provided a clean approach for adding an optional `due_date` field, updating the database model, and implementing logic for identifying overdue tasks.
 
 ---
 
-## Prompt 4 – Input Validation
-**Goal:** Validate incoming requests.
+## Prompt 2 – Implement Tags
 
-**Prompt:**
-> How can I validate task creation requests using Express Validator?
+**Goal**
 
-**Outcome:**
-Implemented validation rules for required fields and invalid data.
+Allow tasks to be organized using tags.
 
----
+**Prompt**
 
-## Prompt 5 – Testing
-**Goal:** Test the API.
+> Show how to add tags to tasks in a FastAPI Task Tracker API. Include model changes and CRUD support.
 
-**Prompt:**
-> Write Postman test cases for a Task Tracker API CRUD application.
+**Outcome**
 
-**Outcome:**
-Created test cases covering successful requests and common error scenarios.
+The response suggested storing tags with each task and updating the API so tags could be created, updated, and returned in responses.
 
 ---
 
-## Lessons Learned
+## Prompt 3 – Status Validation
 
-- More specific prompts produce more useful code.
-- Asking for examples speeds up development.
-- AI is helpful for debugging and documentation, but all generated code should be reviewed and tested.
+**Goal**
+
+Validate task status transitions.
+
+**Prompt**
+
+> Implement validation so task status can only move from todo → in_progress → done.
+
+**Outcome**
+
+The generated solution helped implement transition rules while preventing invalid backward transitions.
+
+---
+
+## Prompt 4 – API Testing
+
+**Goal**
+
+Improve automated testing.
+
+**Prompt**
+
+> Write pytest tests for CRUD operations, status transitions, and invalid requests in a FastAPI Task Tracker API.
+
+**Outcome**
+
+Additional unit tests were added for successful requests and common error conditions.
+
+---
+
+## Prompt 5 – Documentation
+
+**Goal**
+
+Improve project documentation.
+
+**Prompt**
+
+> Generate documentation describing the implemented API features, usage examples, and testing strategy.
+
+**Outcome**
+
+The generated documentation served as a starting point for the README and project reports.
+
+---
+
+# Lessons Learned
+
+- Specific prompts produced more accurate responses.
+- AI accelerated implementation and debugging.
+- Generated code was reviewed and modified before being committed.
+- Documentation quality improved by iteratively refining prompts.
