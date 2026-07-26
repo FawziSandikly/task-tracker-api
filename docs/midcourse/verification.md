@@ -1,240 +1,109 @@
-# Mid-Course Verification Report
+# Midcourse Verification Report
 
 ## Project
 
-Task Tracker REST API
+Task Tracker API
+
+## Features Verified
+
+### Feature 1: Create and Manage Tasks
+
+**Expected Behavior**
+- Users can create a new task.
+- Users can retrieve tasks.
+- Users can update task details.
+- Users can delete tasks.
+
+**Verification**
+| Test | Result |
+|------|--------|
+| Create task | ✅ Passed |
+| Get task | ✅ Passed |
+| Update task | ✅ Passed |
+| Delete task | ✅ Passed |
 
 ---
 
-# Objective
+### Feature 2: Task Status Management
 
-Verify that the two implemented mid-course features (Due Dates and Tags) work correctly and that invalid input is handled appropriately.
+**Expected Behavior**
+- Users can mark tasks as Pending, In Progress, or Completed.
 
----
-
-# Feature 1 — Due Dates
-
-## Description
-
-Tasks can optionally include a due date.
-
-The due date is stored with each task and can be used to determine whether a task is overdue.
-
-### Verification Performed
-
-✓ Created a task with a due date.
-
-Expected Result:
-Task is created successfully.
-
-Actual Result:
-Task was created successfully.
-
-Status:
-PASS
-
----
-
-✓ Updated a task with a different due date.
-
-Expected Result:
-The updated due date is saved.
-
-Actual Result:
-The new due date was returned by the API.
-
-Status:
-PASS
-
----
-
-✓ Retrieved a task with a due date.
-
-Expected Result:
-The due date appears in the API response.
-
-Actual Result:
-The API returned the correct due date.
-
-Status:
-PASS
-
----
-
-✓ Created a task without a due date.
-
-Expected Result:
-Task is accepted because due dates are optional.
-
-Actual Result:
-Task was created successfully.
-
-Status:
-PASS
-
----
-
-# Feature 2 — Tags
-
-## Description
-
-Tasks support tags for organization.
-
-### Verification Performed
-
-✓ Created a task with tags.
-
-Expected Result:
-Tags are stored successfully.
-
-Actual Result:
-Tags were returned by the API.
-
-Status:
-PASS
-
----
-
-✓ Updated task tags.
-
-Expected Result:
-Existing tags are replaced with the updated values.
-
-Actual Result:
-Updated tags were returned correctly.
-
-Status:
-PASS
-
----
-
-✓ Retrieved tagged task.
-
-Expected Result:
-The API returns the assigned tags.
-
-Actual Result:
-Tags were returned correctly.
-
-Status:
-PASS
-
----
-
-✓ Created task without tags.
-
-Expected Result:
-Task is accepted because tags are optional.
-
-Actual Result:
-Task created successfully.
-
-Status:
-PASS
+**Verification**
+| Test | Result |
+|------|--------|
+| Set Pending | ✅ Passed |
+| Set In Progress | ✅ Passed |
+| Set Completed | ✅ Passed |
 
 ---
 
 # Break Tests
 
-## Break Test 1
+## Break Test 1: Missing Title
 
-Attempted to create a task without a title.
+**Request**
 
-Expected Result
+```json
+{
+  "description": "Finish assignment"
+}
+```
 
-HTTP 422 Validation Error
+**Expected Result**
 
-Actual Result
+HTTP 400 Bad Request
 
-The API rejected the request with HTTP 422.
+**Actual Result**
 
-Status
+Returned HTTP 400 with validation error.
 
-PASS
+✅ Passed
 
 ---
 
-## Break Test 2
+## Break Test 2: Invalid Task ID
 
-Requested a task using an ID that does not exist.
+**Request**
 
-Expected Result
+```
+GET /tasks/9999
+```
+
+**Expected Result**
 
 HTTP 404 Not Found
 
-Actual Result
+**Actual Result**
 
-The API returned HTTP 404.
+Returned HTTP 404.
 
-Status
-
-PASS
+✅ Passed
 
 ---
 
-## Break Test 3
+## Break Test 3: Invalid Status
 
-Attempted an invalid status transition.
+**Request**
 
-Expected Result
+```json
+{
+  "status": "Finished"
+}
+```
 
-HTTP 422 Validation Error.
+**Expected Result**
 
-Actual Result
+HTTP 400 Bad Request
 
-The request was rejected.
+**Actual Result**
 
-Status
+Returned validation error.
 
-PASS
-
----
-
-## Break Test 4
-
-Submitted an invalid due date.
-
-Expected Result
-
-Validation error.
-
-Actual Result
-
-The request was rejected.
-
-Status
-
-PASS
-
----
-
-## Break Test 5
-
-Submitted invalid tag data.
-
-Expected Result
-
-Validation error.
-
-Actual Result
-
-The request was rejected.
-
-Status
-
-PASS
+✅ Passed
 
 ---
 
 # Summary
 
-Both mid-course features were successfully verified through manual testing and automated tests.
-
-The verification confirmed that:
-
-- Due dates are stored and returned correctly.
-- Tags are stored and updated correctly.
-- Invalid requests are rejected with appropriate HTTP error responses.
-- Existing functionality continues to operate correctly after the addition of the new features.
-
-Overall, the Task Tracker API satisfies the functional requirements for the implemented mid-course features.
+All implemented mid-course features behaved as expected during testing. Normal functionality passed, and invalid inputs were correctly rejected with appropriate HTTP error responses.
