@@ -1,94 +1,91 @@
 # Prompt Log
 
 ## Project
-
 Task Tracker REST API
 
----
-
-## Prompt 1 – Design Due Date Feature
-
-**Goal**
-
-Design a feature that allows tasks to have optional due dates and support overdue task filtering.
-
-**Prompt**
-
-> Design a FastAPI implementation for adding optional due dates to a Task Tracker API using SQLModel. Include validation and an overdue filter.
-
-**Outcome**
-
-The response provided a clean approach for adding an optional `due_date` field, updating the database model, and implementing logic for identifying overdue tasks.
+This document records the prompts used during the development of the mid-course features and how they contributed to the implementation.
 
 ---
 
-## Prompt 2 – Implement Tags
+## Prompt 1
 
-**Goal**
+### Goal
+Implement Due Dates for tasks.
 
-Allow tasks to be organized using tags.
+### Prompt
+Design a FastAPI implementation that adds an optional due_date field to a Task Tracker API built with SQLModel. Include validation and explain how overdue tasks should be determined.
 
-**Prompt**
+### Outcome
+The response explained how to:
+- Add a due_date field to the SQLModel model.
+- Update request and response schemas.
+- Store due dates in SQLite.
+- Compare due dates against the current date to determine whether a task is overdue.
 
-> Show how to add tags to tasks in a FastAPI Task Tracker API. Include model changes and CRUD support.
-
-**Outcome**
-
-The response suggested storing tags with each task and updating the API so tags could be created, updated, and returned in responses.
-
----
-
-## Prompt 3 – Status Validation
-
-**Goal**
-
-Validate task status transitions.
-
-**Prompt**
-
-> Implement validation so task status can only move from todo → in_progress → done.
-
-**Outcome**
-
-The generated solution helped implement transition rules while preventing invalid backward transitions.
+The generated code was reviewed and adapted before being added to the project.
 
 ---
 
-## Prompt 4 – API Testing
+## Prompt 2
 
-**Goal**
+### Goal
+Implement Tags.
 
+### Prompt
+Show how to add tags to a Task Tracker API so each task can store multiple tags and return them in API responses.
+
+### Outcome
+The response explained how to:
+- Store tags with each task.
+- Update the schemas.
+- Return tags from the API.
+- Support updating tags.
+
+The generated solution required minor modifications before integration.
+
+---
+
+## Prompt 3
+
+### Goal
 Improve automated testing.
 
-**Prompt**
+### Prompt
+Write pytest tests for a FastAPI Task Tracker API including CRUD operations, due dates, tags, and invalid input handling.
 
-> Write pytest tests for CRUD operations, status transitions, and invalid requests in a FastAPI Task Tracker API.
-
-**Outcome**
-
-Additional unit tests were added for successful requests and common error conditions.
+### Outcome
+The response generated example unit tests that were modified to match the project structure before being committed.
 
 ---
 
-## Prompt 5 – Documentation
+## Prompt 4
 
-**Goal**
+### Goal
+Debug API validation.
 
+### Prompt
+Why does my FastAPI endpoint return HTTP 422 instead of HTTP 200 when updating a task?
+
+### Outcome
+The explanation helped identify validation issues and improve request handling.
+
+---
+
+## Prompt 5
+
+### Goal
 Improve project documentation.
 
-**Prompt**
+### Prompt
+Generate documentation explaining the new features, API endpoints, and testing strategy.
 
-> Generate documentation describing the implemented API features, usage examples, and testing strategy.
-
-**Outcome**
-
-The generated documentation served as a starting point for the README and project reports.
+### Outcome
+The generated documentation was used as a starting point for updating the README and project reports.
 
 ---
 
-# Lessons Learned
+# Reflection on AI Usage
 
-- Specific prompts produced more accurate responses.
-- AI accelerated implementation and debugging.
-- Generated code was reviewed and modified before being committed.
-- Documentation quality improved by iteratively refining prompts.
+AI significantly reduced development time by helping explain concepts, generate example code, and debug problems. All generated code was reviewed, tested, and modified before being merged into the project.
+
+The most useful prompts were the ones that included project-specific details rather than general programming questions.
