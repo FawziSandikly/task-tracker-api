@@ -241,6 +241,11 @@ Once comfortable with this setup, consider:
 - Adding user authentication
 - Using Alembic for schema migrations
 - Deploying with production database
+## Requirements
+
+This project pins all core dependencies to ensure consistent behavior across machines.
+
+Install dependencies:
 
 ## Resources
 
