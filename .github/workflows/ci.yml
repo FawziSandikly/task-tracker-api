@@ -64,3 +64,4 @@ jobs:
         sleep 3
         curl -f http://localhost:8000/api/v1/health || exit 1
         docker stop task-tracker
+
