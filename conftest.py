@@ -43,3 +43,4 @@ def client_fixture(session: Session):
     
     # Clean up dependency overrides after test
     app.dependency_overrides.clear()
+    
