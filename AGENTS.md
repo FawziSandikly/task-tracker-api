@@ -156,6 +156,7 @@ If AI suggests something that violates these rules:
 
 ## References
 
+
 - Project README: README.md
 - Architecture Decision Record: ADR-0001 (in MODULE_3.md or TESTING.md)
 - Test Strategy: TESTING.md
