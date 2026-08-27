@@ -168,7 +168,7 @@ task-tracker-api/
 
 ## Database
 
-Tasks are stored in SQLite at `./task_tracker.db`. The database is created automatically on first run.
+Tasks are stored locally in SQLite at `./task_tracker.db`. This is the application persistence layer for the learning project; it is not configured as a production database. Tests use isolated in-memory SQLite databases.
 
 ### Schema
 ```sql
@@ -322,3 +322,4 @@ Future improvements include:
 ## License
 
 This project is for learning purposes.
+
