@@ -368,3 +368,138 @@ titles = [task["title"] for task in data]
 assert "Urgent task" in titles
 assert "Normal task" not in titles
 ```
+def test_create_task_with_due_date(client: TestClient):
+"""Test creating a task with a due date"""
+response = client.post(
+"/api/v1/tasks/",
+json={
+"title": "Task with due date",
+"due_date": "2026-09-10"
+}
+)
+
+```
+assert response.status_code == 200
+data = response.json()
+assert data["due_date"] == "2026-09-10"
+```
+
+def test_create_task_with_tags(client: TestClient):
+"""Test creating a task with tags"""
+response = client.post(
+"/api/v1/tasks/",
+json={
+"title": "Tagged task",
+"tags": "urgent, work, backend"
+}
+)
+
+```
+assert response.status_code == 200
+data = response.json()
+assert data["tags"] == "backend, urgent, work"
+```
+
+def test_update_task_with_due_date(client: TestClient):
+"""Test updating a task with a due date"""
+create_response = client.post(
+"/api/v1/tasks/",
+json={"title": "Task"}
+)
+
+```
+assert create_response.status_code == 200
+task_id = create_response.json()["id"]
+
+response = client.patch(
+    f"/api/v1/tasks/{task_id}",
+    json={"due_date": "2026-09-15"}
+)
+
+assert response.status_code == 200
+assert response.json()["due_date"] == "2026-09-15"
+```
+
+def test_update_task_with_tags(client: TestClient):
+"""Test updating a task with tags"""
+create_response = client.post(
+"/api/v1/tasks/",
+json={"title": "Task"}
+)
+
+```
+assert create_response.status_code == 200
+task_id = create_response.json()["id"]
+
+response = client.patch(
+    f"/api/v1/tasks/{task_id}",
+    json={"tags": "design, urgent"}
+)
+
+assert response.status_code == 200
+assert response.json()["tags"] == "design, urgent"
+```
+
+def test_filter_overdue_tasks(client: TestClient):
+"""Test filtering tasks whose due date is before today"""
+overdue_response = client.post(
+"/api/v1/tasks/",
+json={
+"title": "Overdue task",
+"due_date": "2020-01-01"
+}
+)
+
+```
+future_response = client.post(
+    "/api/v1/tasks/",
+    json={
+        "title": "Future task",
+        "due_date": "2099-12-31"
+    }
+)
+
+assert overdue_response.status_code == 200
+assert future_response.status_code == 200
+
+response = client.get("/api/v1/tasks/?filter=overdue")
+
+assert response.status_code == 200
+
+titles = [task["title"] for task in response.json()]
+
+assert "Overdue task" in titles
+assert "Future task" not in titles
+```
+
+def test_filter_tasks_by_tag(client: TestClient):
+"""Test filtering tasks by tag"""
+urgent_response = client.post(
+"/api/v1/tasks/",
+json={
+"title": "Urgent task",
+"tags": "urgent, work"
+}
+)
+
+```
+normal_response = client.post(
+    "/api/v1/tasks/",
+    json={
+        "title": "Normal task",
+        "tags": "work"
+    }
+)
+
+assert urgent_response.status_code == 200
+assert normal_response.status_code == 200
+
+response = client.get("/api/v1/tasks/?tag=urgent")
+
+assert response.status_code == 200
+
+titles = [task["title"] for task in response.json()]
+
+assert "Urgent task" in titles
+assert "Normal task" not in titles
+```
