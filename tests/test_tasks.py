@@ -248,10 +248,7 @@ json={
 
 ```
 assert response.status_code == 200
-
-data = response.json()
-assert data["title"] == "Task with due date"
-assert data["due_date"] == "2026-09-10"
+assert response.json()["due_date"] == "2026-09-10"
 ```
 
 def test_create_task_with_tags(client: TestClient):
@@ -266,142 +263,11 @@ json={
 
 ```
 assert response.status_code == 200
-
-data = response.json()
-assert data["tags"] == "backend, urgent, work"
+assert response.json()["tags"] == "backend, urgent, work"
 ```
 
 def test_update_task_with_due_date(client: TestClient):
 """Test updating an existing task with a due date"""
-create_response = client.post(
-"/api/v1/tasks/",
-json={"title": "Task"}
-)
-task_id = create_response.json()["id"]
-
-```
-response = client.patch(
-    f"/api/v1/tasks/{task_id}",
-    json={"due_date": "2026-09-15"}
-)
-
-assert response.status_code == 200
-assert response.json()["due_date"] == "2026-09-15"
-```
-
-def test_update_task_with_tags(client: TestClient):
-"""Test updating an existing task with tags"""
-create_response = client.post(
-"/api/v1/tasks/",
-json={"title": "Task"}
-)
-task_id = create_response.json()["id"]
-
-```
-response = client.patch(
-    f"/api/v1/tasks/{task_id}",
-    json={"tags": "design, urgent"}
-)
-
-assert response.status_code == 200
-assert response.json()["tags"] == "design, urgent"
-```
-
-def test_filter_overdue_tasks(client: TestClient):
-"""Test filtering tasks whose due date is before today"""
-client.post(
-"/api/v1/tasks/",
-json={
-"title": "Overdue task",
-"due_date": "2020-01-01"
-}
-)
-
-```
-client.post(
-    "/api/v1/tasks/",
-    json={
-        "title": "Future task",
-        "due_date": "2099-12-31"
-    }
-)
-
-response = client.get("/api/v1/tasks/?filter=overdue")
-
-assert response.status_code == 200
-
-data = response.json()
-titles = [task["title"] for task in data]
-
-assert "Overdue task" in titles
-assert "Future task" not in titles
-```
-
-def test_filter_tasks_by_tag(client: TestClient):
-"""Test filtering tasks by tag"""
-client.post(
-"/api/v1/tasks/",
-json={
-"title": "Urgent task",
-"tags": "urgent, work"
-}
-)
-
-```
-client.post(
-    "/api/v1/tasks/",
-    json={
-        "title": "Normal task",
-        "tags": "work"
-    }
-)
-
-response = client.get(
-    "/api/v1/tasks/?tag=urgent"
-)
-
-assert response.status_code == 200
-
-data = response.json()
-titles = [task["title"] for task in data]
-
-assert "Urgent task" in titles
-assert "Normal task" not in titles
-```
-def test_create_task_with_due_date(client: TestClient):
-"""Test creating a task with a due date"""
-response = client.post(
-"/api/v1/tasks/",
-json={
-"title": "Task with due date",
-"due_date": "2026-09-10"
-}
-)
-
-```
-assert response.status_code == 200
-data = response.json()
-assert data["due_date"] == "2026-09-10"
-```
-
-def test_create_task_with_tags(client: TestClient):
-"""Test creating a task with tags"""
-response = client.post(
-"/api/v1/tasks/",
-json={
-"title": "Tagged task",
-"tags": "urgent, work, backend"
-}
-)
-
-```
-assert response.status_code == 200
-data = response.json()
-assert data["tags"] == "backend, urgent, work"
-```
-
-def test_update_task_with_due_date(client: TestClient):
-"""Test updating a task with a due date"""
 create_response = client.post(
 "/api/v1/tasks/",
 json={"title": "Task"}
@@ -421,7 +287,7 @@ assert response.json()["due_date"] == "2026-09-15"
 ```
 
 def test_update_task_with_tags(client: TestClient):
-"""Test updating a task with tags"""
+"""Test updating an existing task with tags"""
 create_response = client.post(
 "/api/v1/tasks/",
 json={"title": "Task"}
