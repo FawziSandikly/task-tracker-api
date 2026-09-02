@@ -45,3 +45,8 @@ venv.bak/
 *.db
 task_tracker.db
 
+
+# OS
+.DS_Store
+Thumbs.db
+
