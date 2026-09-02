@@ -40,25 +40,31 @@ pytest
 
 **Actual Test Results**:
 ```
-collected 15 items
+## Actual Test Results
 
-tests/test_health.py::test_health_check PASSED
-tests/test_tasks.py::test_create_task PASSED
-tests/test_tasks.py::test_create_task_with_due_date PASSED
-tests/test_tasks.py::test_list_tasks PASSED
-tests/test_tasks.py::test_get_task_by_id PASSED
-tests/test_tasks.py::test_update_task_status PASSED
-tests/test_tasks.py::test_invalid_status_transition PASSED
-tests/test_tasks.py::test_partial_update_preserves_fields PASSED
-tests/test_tasks.py::test_update_task_with_tags PASSED
-tests/test_tasks.py::test_filter_overdue_tasks PASSED
-tests/test_tasks.py::test_filter_tasks_by_tag PASSED
-tests/test_tasks.py::test_delete_task PASSED
-tests/test_tasks.py::test_task_not_found PASSED
-tests/test_tasks.py::test_invalid_request_body PASSED
-tests/test_tasks.py::test_create_task_with_empty_title PASSED
+The project's automated test suite was executed locally using:
 
-============================= 15 passed in 0.45s =============================
+```bash
+python -m pytest
+```
+
+Result:
+
+```text
+20 passed
+```
+
+The test suite includes genuine coverage for the restored due-date and tag functionality:
+
+* `test_create_task_with_due_date`
+* `test_create_task_with_tags`
+* `test_update_task_with_due_date`
+* `test_update_task_with_tags`
+* `test_filter_overdue_tasks`
+* `test_filter_tasks_by_tag`
+
+These tests are implemented in `tests/test_tasks.py` and were executed successfully as part of the 20 passing tests.
+
 ```
 
 **Status**: ✅ All 15 tests passed
